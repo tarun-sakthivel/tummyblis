@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tummyblis/Components/FormContainerWidget.dart';
+import 'package:tummyblis/Components/firebase_auth_svs.dart';
+import 'package:tummyblis/Components/toast.dart';
 import 'package:tummyblis/Screens/Homepage.dart';
 import 'package:tummyblis/Screens/vendor_homescreen.dart';
 import 'package:tummyblis/Screens/welcomepage.dart';
@@ -12,6 +15,7 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
   TextEditingController _usenameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -121,20 +125,7 @@ class _SignupState extends State<Signup> {
             height: 15,
           ),
           GestureDetector(
-            onTap: () => {
-              if (valueChoose == "Student")
-                {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Welcome()))
-                }
-              else
-                {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Vendor_Homepage()))
-                }
-            },
+            onTap: _signUp,
             child: Container(
               height: 55,
               width: 310,
@@ -183,6 +174,34 @@ class _SignupState extends State<Signup> {
       ),
     );
   }
+
+  void _signUp() async {
+    setState(() {
+      _SigningUp = true;
+    });
+    String username = _usenameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signupEandP(email, password, username);
+    setState(() {
+      _SigningUp = false;
+    });
+    if (user != null) {
+      showToast(message: "User successfully created");
+      if (valueChoose == "Student") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Welcome()));
+      } else {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => Vendor_Homepage()));
+      }
+    } else {
+      showToast(message: "SignUp unsuccessful");
+    }
+  }
+
+//SIGNUP AUTH
 }
 
 

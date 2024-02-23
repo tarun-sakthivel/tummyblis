@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tummyblis/Components/buy_button.dart';
 import 'package:tummyblis/Components/quantity_adder.dart';
 import 'package:tummyblis/Screens/Homescreen.dart';
+import 'package:tummyblis/Screens/cartpage.dart';
 
 class Productdisp1 extends StatefulWidget {
   Color color1;
@@ -93,7 +94,22 @@ class _Productdisp1State extends State<Productdisp1> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Placeholder()));
+                                builder: (context) => CartPage(
+                                      cartItems: [
+                                        CartItem(
+                                            imageaddr:
+                                                "lib/Images/fruits/apple.png",
+                                            name: "apple",
+                                            description: "Apple",
+                                            price: 75.0),
+                                        CartItem(
+                                            imageaddr:
+                                                "lib/Images/fruits/mango.png",
+                                            name: "mango",
+                                            description: "mango",
+                                            price: 82.0)
+                                      ],
+                                    )));
                       },
                       icon: Icon(
                         Icons.shopping_cart,
@@ -157,7 +173,10 @@ class _Productdisp1State extends State<Productdisp1> {
                         SizedBox(
                           height: 5,
                         ),
-                        Center(child: buy_button())
+                        Center(
+                            child: buy_button(
+                          text1: "BUY NOW",
+                        ))
                       ],
                     ),
                   ),

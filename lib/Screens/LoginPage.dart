@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tummyblis/Components/FormContainerWidget.dart';
+import 'package:tummyblis/Components/firebase_auth_svs.dart';
+import 'package:tummyblis/Components/toast.dart';
 import 'package:tummyblis/Screens/Homepage.dart';
+import 'package:tummyblis/Screens/Homescreen.dart';
 import 'package:tummyblis/Screens/Signuppage.dart';
 import 'package:tummyblis/Screens/vendor_homescreen.dart';
 import 'package:tummyblis/Screens/welcomepage.dart';
@@ -13,6 +17,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
   late String? valueChoose = "Student";
   List listItem = ["Student", "Vendor"];
   bool _SigningIn = false;
@@ -114,20 +119,7 @@ class _LoginState extends State<Login> {
             height: 25,
           ),
           GestureDetector(
-            onTap: () => {
-              if (valueChoose == "Student")
-                {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Welcome()))
-                }
-              else
-                {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Vendor_Homepage()))
-                }
-            },
+            onTap: _signIn,
             child: Container(
               height: 55,
               width: 310,
@@ -178,30 +170,45 @@ class _LoginState extends State<Login> {
     );
   }
 
-  // void _signIn() async {
-  //   setState(() {
-  //     _SigningIn = true;
-  //   });
-  //   String email = _emailController.text;
-  //   String password = _passwordController.text;
+  void _signIn() async {
+    setState(() {
+      _SigningIn = true;
+    });
+    String email = _emailController.text;
+    String password = _passwordController.text;
 
-  //   User? user = await _auth.loginEandP(email, password);
-  //   setState(() {
-  //     _SigningIn = false;
-  //   });
-  //   if (user != null) {
-  //     //showToast(message: "User successfully Loged in");
-  //     Navigator.push(
-  //         context,
-  //         MaterialPageRoute(
-  //             builder: (context) => Home(
-  //                   name: user.displayName ?? "Vitian",
-  //                 )));
-  //   } else {
-  //     //showToast(message: "Login unsuccessful");
-  //   }
-  // }
+    User? user = await _auth.loginEandP(email, password);
+    setState(() {
+      _SigningIn = false;
+    });
+    if (user != null) {
+      showToast(message: "User successfully Loged in");
+      if (valueChoose == "Student") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Welcome()));
+      } else {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => Vendor_Homepage()));
+      }
+    } else {
+      showToast(message: "Login unsuccessful");
+    }
+  }
 }
 
 
-//LOGIN PAGE
+// //LOGIN PAGE
+// onTap: () => {
+//               if (valueChoose == "Student")
+//                 {
+//                   Navigator.push(context,
+//                       MaterialPageRoute(builder: (context) => Welcome()))
+//                 }
+//               else
+//                 {
+//                   Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                           builder: (context) => Vendor_Homepage()))
+//                 }
+//             },

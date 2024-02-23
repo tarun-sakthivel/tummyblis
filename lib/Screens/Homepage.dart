@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tummyblis/Components/bottom_navigator.dart';
 import 'package:tummyblis/Screens/Homescreen.dart';
 import 'package:tummyblis/Screens/LoginPage.dart';
+import 'package:tummyblis/Screens/healthtips.dart';
 import 'package:tummyblis/Screens/vegetablescreen.dart';
 
 class Homepage extends StatefulWidget {
@@ -77,7 +78,7 @@ class _HomepageState extends State<Homepage> {
               string: 'lib/Images/HealthTips.png',
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Placeholder()));
+                    MaterialPageRoute(builder: (context) => Healthtips()));
               }, //this is the place used to reoute to the health tips page
             ),
           ],

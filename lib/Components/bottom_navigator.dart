@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tummyblis/Screens/Homepage.dart';
+import 'package:tummyblis/Screens/Profile.dart';
 import 'package:tummyblis/Screens/cartpage.dart';
+import 'package:tummyblis/Screens/healthtips.dart';
 
 int currentindex = 0;
 
@@ -81,7 +83,7 @@ class _navigator_barState extends State<navigator_bar> {
             activeIcon: IconButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Placeholder()));
+                    MaterialPageRoute(builder: (context) => Healthtips()));
               },
               icon: Icon(
                 Icons.storefront,
@@ -92,12 +94,12 @@ class _navigator_barState extends State<navigator_bar> {
               Icons.storefront,
               color: Colors.black,
             ),
-            label: 'Store'),
+            label: 'Tips'),
         BottomNavigationBarItem(
             activeIcon: IconButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Placeholder()));
+                    MaterialPageRoute(builder: (context) => (Profile())));
               },
               icon: Icon(
                 Icons.person,

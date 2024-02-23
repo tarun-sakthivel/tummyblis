@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "872988489206",
+    "project_id": "tummybliss-9c73c",
+    "storage_bucket": "tummybliss-9c73c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872988489206:android:123e5e349d310412cd83d7",
+        "android_client_info": {
+          "package_name": "com.example.tummyblis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALVKf-n_7ZKN56YWA-iXZUCsBuy37dGnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
